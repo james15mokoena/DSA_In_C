@@ -85,21 +85,34 @@ void test_p_list(){
     if(list != NULL){
 
         // testing insert operations
-        double i1 = 2025.354;
+        string i1 = "Pheello";
         pl_pos* y1 = add_first(&i1,list);  
 
-        double i2 = 2026.64435;
+        string i2 = "Pastor Chris";
         pl_pos* y2 = add_after(y1,&i2,list);
 
-        double i3 = 2027.543;
+        string i3 = "Mish";
         pl_pos* y3 = add_after(y2,&i3,list);
 
-        double i4 = 2028.562765;
+        string i4 = "Precious";
         pl_pos* y4 = add_last(&i4,list);
 
         printf("List size: %d\n",size(list));
 
-        print_p_list(list,double_print);
+        print_p_list(list,str_print);
+
+        string i = "Ben 10";
+        pl_pos* p1 = str_search(i1,list);
+
+        if(p1 != NULL){
+            string s = (string) p1->data_ptr;
+            printf("Found: %s\n",s);
+        }            
+        else{
+            string s = (string) p1->data_ptr;
+            printf("Not found: %s\n",s);
+        }
+            
 
         list = destroy_p_list(list);
 

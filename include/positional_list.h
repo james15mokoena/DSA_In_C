@@ -319,6 +319,26 @@ pl_pos* str_search(string elem_ptr, p_list* list);
  */
 pl_pos* long_search(long* elem_ptr, p_list* list);
 
+/**
+ * @brief A macro that generalizes searching for an element of the type stored in
+ * the positional list.
+ * @param list A pointer to a positional list to be searched.
+ * @param elem_ptr A pointer to the element to be searched for.
+ * @param elem_type The data type of the element to be searched for.
+ */
+#define PL_SEARCH(list,elem_ptr,elem_type)\
+    if(elem_ptr != NULL && list != NULL && is_empty(list) == FALSE){\
+        pl_pos* curr = get_header(list)->next_ptr;\
+        elem_type* targ_elem = elem_ptr;\
+        while(curr != get_trailer(list)){\
+            elem_type* elem = (elem_type*) curr->data_ptr;\
+            if(*elem == *targ_elem)\
+                return curr;\
+            curr = after(curr,list);\
+        }\
+        printf("\n");\
+    }
+
 ////////////////////// END OF SEARCH FUNCTIONS //////////////////////
 
 
@@ -360,22 +380,23 @@ void double_print(p_list* list);
  */
 void float_print(p_list* list);
 
-/*#define print_pl(list,type, w) 
-    if(list != NULL && is_empty(list) == FALSE){ \ 
-                                                    
-        // get the first position in the list.
-        pl_pos* curr = get_header(list)->next_ptr;  \
-
-        w(curr != list->trailer){   \
-
-            type elem = (type) curr->data_ptr;  \
-            printf("%d\n",*elem);   \
-
-            curr = after(curr,list);    \
-        }   \
-
-    }*/
-
+/**
+ * @brief A macro that generalizes the functionality for printing the elements
+ * of a positional list.
+ * @param list A pointer to a positional list whose elements are to be printed.
+ * @param type The data type of the elements stored in the positional list.
+ * @param format The format used to print the type of elements stored in the list.
+ */
+#define PRINT_P_LIST(list,type, format)\
+    if(list != NULL && is_empty(list) == FALSE){\
+        pl_pos* curr = get_header(list)->next_ptr;\
+        while(curr != list->trailer){\
+            type* elem = (type*) curr->data_ptr;\
+            printf(format,*elem);\
+            printf("\n");\
+            curr = after(curr,list);\
+        } \
+    }
 
 ////////////////////// END OF PRINT FUNCTIONS //////////////////////
 

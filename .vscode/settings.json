@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "dynamic_arrays.h": "c",
+        "positional_list.h": "c"
+    }
+}

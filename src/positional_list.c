@@ -307,27 +307,23 @@ void print_p_list(p_list* list, ptr_print func){
 
 pl_pos* str_search(string elem_ptr, p_list* list){
 
-    PL_SEARCH(list,elem_ptr,char)   // FIX THIS
-
-    /*if(elem_ptr != NULL && list != NULL && is_empty(list) == FALSE){
+    if(elem_ptr != NULL && list != NULL && is_empty(list) == FALSE){
 
         // get the first position in the list.
         pl_pos* curr = get_header(list)->next_ptr;
-        string targ_elem = elem_ptr;
-
+        
         // search until at most we reach the trailer position.
         while(curr != get_trailer(list)){
 
-            string elem = (string) curr->data_ptr;
-            printf("%s\n",elem);
-            if(elem == targ_elem)
+            string elem = (string) curr->data_ptr;            
+            if(elem == elem_ptr)
                 return curr;
 
             curr = after(curr,list);
         }
 
         printf("\n");
-    }*/
+    }
 
     return NULL;
 }
@@ -337,7 +333,34 @@ pl_pos* long_search(long* elem_ptr, p_list* list){
     PL_SEARCH(list,elem_ptr,long)
 
     return NULL;
+}
 
+pl_pos* double_search(double* elem_ptr, p_list* list){
+
+    PL_SEARCH(list,elem_ptr,double);
+
+    return NULL;
+}
+
+pl_pos* float_search(float* elem_ptr, p_list* list){
+
+    PL_SEARCH(list,elem_ptr,float);
+
+    return NULL;
+}
+
+pl_pos* int_search(int* elem_ptr, p_list* list){
+
+    PL_SEARCH(list,elem_ptr,int);
+
+    return NULL;
+}
+
+pl_pos* short_search(short* elem_ptr, p_list* list){
+
+    PL_SEARCH(list,elem_ptr,int);
+
+    return NULL;
 }
 
 ////////////////////// END OF SEARCH FUNCTIONS //////////////////////
@@ -346,8 +369,22 @@ pl_pos* long_search(long* elem_ptr, p_list* list){
 ////////////////////// PRINT FUNCTIONS //////////////////////
 
 void str_print(p_list* list){
+    
+    if(list != NULL && is_empty(list) == FALSE){
 
-    PRINT_P_LIST(list,char*,"%s")
+        // get the first position in the list.
+        pl_pos* curr = get_header(list)->next_ptr;
+        
+        // search until at most we reach the trailer position.
+        while(curr != get_trailer(list)){
+
+            string elem = (string) curr->data_ptr;
+            printf("%s\n",elem);        
+            curr = after(curr,list);
+        }
+
+        printf("\n");
+    }
 }
 
 void long_print(p_list* list){

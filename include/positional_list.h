@@ -312,12 +312,44 @@ void print_p_list(p_list* list, ptr_print func);
 pl_pos* str_search(string elem_ptr, p_list* list);
 
 /**
- * @brief Searches for the element in a positional list storing integer (short, int, long).
+ * @brief Searches for the element in a positional list storing long elements.
  * @param elem_ptr A pointer to the element to be searched for.
  * @param list A positional list to be searched.
  * @return the position storing the element or null if the element is not found.
  */
 pl_pos* long_search(long* elem_ptr, p_list* list);
+
+/**
+ * @brief Searches for the element in a positional list storing double elements.
+ * @param elem_ptr A pointer to the element to be searched for.
+ * @param list A positional list to be searched.
+ * @return the position storing the element or null if the element is not found.
+ */
+pl_pos* double_search(double* elem_ptr, p_list* list);
+
+/**
+ * @brief Searches for the element in a positional list storing float elements.
+ * @param elem_ptr A pointer to the element to be searched for.
+ * @param list A positional list to be searched.
+ * @return the position storing the element or null if the element is not found.
+ */
+pl_pos* float_search(float* elem_ptr, p_list* list);
+
+/**
+ * @brief Searches for the element in a positional list storing integer elements.
+ * @param elem_ptr A pointer to the element to be searched for.
+ * @param list A positional list to be searched.
+ * @return the position storing the element or null if the element is not found.
+ */
+pl_pos* int_search(int* elem_ptr, p_list* list);
+
+/**
+ * @brief Searches for the element in a positional list storing short elements.
+ * @param elem_ptr A pointer to the element to be searched for.
+ * @param list A positional list to be searched.
+ * @return the position storing the element or null if the element is not found.
+ */
+pl_pos* short_search(short* elem_ptr, p_list* list);
 
 /**
  * @brief A macro that generalizes searching for an element of the type stored in
@@ -329,10 +361,10 @@ pl_pos* long_search(long* elem_ptr, p_list* list);
 #define PL_SEARCH(list,elem_ptr,elem_type)\
     if(elem_ptr != NULL && list != NULL && is_empty(list) == FALSE){\
         pl_pos* curr = get_header(list)->next_ptr;\
-        elem_type* targ_elem = elem_ptr;\
+        elem_type targ_elem = *elem_ptr;\
         while(curr != get_trailer(list)){\
             elem_type* elem = (elem_type*) curr->data_ptr;\
-            if(*elem == *targ_elem)\
+            if(*elem == targ_elem)\
                 return curr;\
             curr = after(curr,list);\
         }\
@@ -400,4 +432,4 @@ void float_print(p_list* list);
 
 ////////////////////// END OF PRINT FUNCTIONS //////////////////////
 
-#endif
+#endif //_DSA_POSITIONAL_LIST_H

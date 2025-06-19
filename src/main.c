@@ -22,6 +22,11 @@ void test_p_list();
 int main(int argc, string argv[]){
 
     test_p_list();
+    //char* s = "Rest";
+
+    //printf("Plain: %s\n",s);
+    //printf("Derefenced: %d\n",*s);
+    //printf("Character constant: %c\n",(char) *s);
 
     printf("Done!!\n");
     
@@ -85,34 +90,29 @@ void test_p_list(){
     if(list != NULL){
 
         // testing insert operations
-        string i1 = "Pheello";
-        pl_pos* y1 = add_first(&i1,list);  
+        string i1 = "Monday";
+        pl_pos* y1 = add_first(i1,list);  
 
-        string i2 = "Pastor Chris";
-        pl_pos* y2 = add_after(y1,&i2,list);
+        string i2 = "Tuesday";
+        pl_pos* y2 = add_after(y1,i2,list);
 
-        string i3 = "Mish";
-        pl_pos* y3 = add_after(y2,&i3,list);
-
-        string i4 = "Precious";
-        pl_pos* y4 = add_last(&i4,list);
-
+        string i3 = "Wednesday";
+        pl_pos* y3 = add_after(y2,i3,list);
+        
         printf("List size: %d\n",size(list));
 
         print_p_list(list,str_print);
 
-        string i = "Ben 10";
-        pl_pos* p1 = str_search(i1,list);
+        //string i = "Ben 10";
+        pl_pos* p1 = str_search("Saturday",list);
 
         if(p1 != NULL){
-            string s = (string) p1->data_ptr;
-            printf("Found: %s\n",s);
+            string d = (string) p1->data_ptr;
+            printf("Found: %s\n",d);
         }            
-        else{
-            string s = (string) p1->data_ptr;
-            printf("Not found: %s\n",s);
+        else{            
+            printf("Not found\n");
         }
-            
 
         list = destroy_p_list(list);
 

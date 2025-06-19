@@ -4,6 +4,10 @@
  * struct of the list is named "pl_pos" which stands for "Positional List Position" 
  * and the positional list struct that represents the positional list is named "p_list",
  * which stands for "Positional List".
+ * All the algorithms for this positional list implementation run is O(1) time with the exception
+ * of the search and print functions which run in O(n). As a result, the time complexity of this
+ * ADT implemented with a doubly linked list is O(n) and the space complexity (usage) is O(n).
+ * 
  * 
  * @note This file only contains the interfaces, no implementation.
  * 

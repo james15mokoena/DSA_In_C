@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "../include/general_tree.h"
 
 /// @brief Indicates that the program terminated successfully.
@@ -15,26 +14,11 @@
  */
 int main(int argc, char* argv[]){
 
-    t_pos p;
-    char* m = "Esther";
-    p.data_ptr = m;
-
-    t_pos p1;
-    char* me = "Pheello";
-    p1.data_ptr = me;
-
-    t_pos p2;
-    char* ju = "Julia";
-    p2.data_ptr = ju;
-
-    t_pos p3;
-    char* te = "Teboho";
-    p3.data_ptr = te;
-
-    printf("%s\n",(char*)p.data_ptr);
-
-
-
+    g_tree* fam = init_gt();
+    gt_pos* root = add_root(fam,"Esther");
     
+        
+    printf("Size: %d\n",get_size(fam));
+
     return SUCCESS;
 }

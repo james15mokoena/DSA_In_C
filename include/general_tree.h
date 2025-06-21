@@ -65,6 +65,16 @@ typedef struct g_tree{
     unsigned int size;
 } g_tree;
 
+
+//////////////////////////////// FUNCTION POINTERS ////////////////////////////////
+
+/**
+ * @brief Prints the elements stored in the children of the general tree position.
+ */
+typedef void (*print_gt_pos_children)(gt_pos* pos);
+
+//////////////////////////////// END OF FUNCTION POINTERS ////////////////////////////////
+
 /**
  * @brief Creates and initializes a general tree.
  * @return a pointer to the newly created general tree.
@@ -186,7 +196,7 @@ bool has_root(g_tree* tree);
  * @param data A pointer to the data to be stored in the root position.
  * @return the root position of the tree.
  */
-gt_pos* add_root(g_tree* tree, void* data);
+gt_pos* add_gt_root(g_tree* tree, void* data);
 
 /**
  * @brief Creates a new general tree position that stores the data and is a child of the parent
@@ -196,7 +206,7 @@ gt_pos* add_root(g_tree* tree, void* data);
  * @param tree A general tree to which the new position is added.
  * @return the newly created general tree position.
  */
-gt_pos* add_child(void* data, gt_pos* parent, g_tree* tree);
+gt_pos* add_gt_child(void* data, gt_pos* parent, g_tree* tree);
 
 /**
  * @brief Returns the number of elements stored in the general tree.
@@ -233,7 +243,7 @@ bool is_expandable(gt_pos* pos);
  * @param tree A general tree.
  * @return true if the tree is empty otherwise false.
  */
-bool is_empty(g_tree* tree);
+bool is_gt_empty(g_tree* tree);
 
 /**
  * @brief Sets the parent of a general tree position.
@@ -242,5 +252,13 @@ bool is_empty(g_tree* tree);
  * @return true if "parent" was set successfully as the parent of "pos".
  */
 bool set_parent(gt_pos* pos, gt_pos* parent);
+
+/**
+ * @brief Prints the string elements stored in the children of a general tree position.
+ * @param pos A general tree position.
+ */
+void gt_pos_str_print(gt_pos* pos);
+
+//gt_pos* remove_gt_pos(gt_pos* pos,)
 
 #endif // _DSA_GENERAL_TREE_H

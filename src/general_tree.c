@@ -199,7 +199,7 @@ bool has_root(g_tree* tree){
     return (tree != NULL && get_root(tree) != NULL) ? true : false;
 }
 
-gt_pos* add_root(g_tree* tree, void* data){
+gt_pos* add_gt_root(g_tree* tree, void* data){
 
     if(tree != NULL && !has_root(tree) && data != NULL){
         tree->root = init_gt_pos(data);
@@ -210,20 +210,25 @@ gt_pos* add_root(g_tree* tree, void* data){
     return NULL;
 }
 
+gt_pos* add_gt_child(void* data, gt_pos* parent, g_tree* tree){
 
-gt_pos* add_child(void* data, gt_pos* parent, g_tree* tree){
+    if(data != NULL && parent != NULL && tree != NULL){
 
-    if(data != NULL && parent != NULL){
+        if(is_expandable(parent))
+            parent = expand_gt_pos(parent);                    
 
-        if(is_expandable(parent)){
-            parent = expand_gt_pos(parent);
-            gt_pos* new_pos = init_gt_pos(data);
-            new_pos->parent = parent;
-            if(get_next_slot(parent) >= 0){
-                parent->children[get_next_slot(parent)] = new_pos;   // CONTINUE HERE...
-            }
+        gt_pos* new_pos = init_gt_pos(data);
+        new_pos->parent = parent;
+        if(get_next_slot(parent) >= 0 && get_next_slot(parent) < parent->num_children_cap && parent->children[get_next_slot(parent)] == NULL){
+            parent->children[get_next_slot(parent)] = new_pos;   // CONTINUE HERE..
+            ++parent->next_slot;
+            ++tree->size;
+            ++parent->num_children;
+            return new_pos;
         }
     }
+
+    return NULL;
 }
 
 unsigned int get_size(g_tree* tree){
@@ -252,7 +257,7 @@ bool is_expandable(gt_pos* pos){
     return false;
 }
 
-bool is_empty(g_tree* tree){
+bool is_gt_empty(g_tree* tree){
     return (tree != NULL && get_size(tree) == 0) ? true : false;
 }
 
@@ -263,4 +268,20 @@ bool set_parent(gt_pos* pos, gt_pos* parent){
     }
 
     return false;
+}
+
+void gt_pos_str_print(gt_pos* pos){
+
+    if(pos != NULL && is_internal(pos)){
+
+        gt_pos** children = get_children(pos);
+
+        for(int i=0; i<get_num_children(pos); ++i){
+            if(children[i] != NULL)
+                printf("%s\n",(char*) children[i]->data_ptr);
+        }
+    }
+    else
+        printf("%s\n","General tree position has no children.");
+
 }
